@@ -1,0 +1,179 @@
+<template>
+    <div class="w-full">
+        <div class="content-overview flex">
+            <div class="flex overview-item">
+                <div class="overview-item-content flex">
+                    <div class="title-overview-content flex">
+                        <div class="title-overview">Tổng số nhân viên</div>
+                    </div>
+                    <div class="flex align-center">
+                        <div class="icon-human"></div>
+                        <div class="total-employee">{{ handleTotalEmployee() }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex overview-item">
+                <div class="overview-item-content flex">
+                    <div class="title-overview-content flex">
+                        <div class="title-overview">Nhân viên mới</div>
+                    </div>
+                    <div class="flex align-center flex" style="padding: 8px;">
+                            <div class="currentMonth">{{ totalNewEmployeeCurrentMonth }}</div>
+                            <div class="flex align-center">
+                                <div v-if="totalNewEmployeeCurrentMonth != 0 && totalNewEmployeeCurrentMonth > totalNewEmployeeLastMonth" class="icon-ratio-up"></div>
+                                <div v-if="totalNewEmployeeCurrentMonth != 0 && totalNewEmployeeCurrentMonth < totalNewEmployeeLastMonth" class="icon-ratio-down"></div>
+                                <div class="val-ratio" v-bind:style="{'color':  (totalNewEmployeeCurrentMonth - totalNewEmployeeLastMonth > 0) ? '#21c74e' : ((totalNewEmployeeCurrentMonth - totalNewEmployeeLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioNewEmployee != 0.0 ? ratioNewEmployee : 0.0}}%</div>
+                            </div>
+                    </div>
+                    <div class="flex align-center last-month">
+                        <div>Tháng trước: {{ totalNewEmployeeLastMonth }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex overview-item">
+                <div class="overview-item-content flex">
+                    <div class="title-overview-content flex">
+                        <div class="title-overview">Thử việc thành công</div>
+                    </div>
+                    <div class="flex align-center flex" style="padding: 8px;">
+                            <div class="currentMonth">{{ totalEmployeeStaffSuccessCurrentMonth }}</div>
+                            <div class="flex align-center">
+                                <div v-if="totalEmployeeStaffSuccessCurrentMonth != 0 && totalEmployeeStaffSuccessCurrentMonth > totalEmployeeStaffSuccessLastMonth" class="icon-ratio-up"></div>
+                                <div v-if="totalEmployeeStaffSuccessCurrentMonth != 0 && totalEmployeeStaffSuccessCurrentMonth < totalEmployeeStaffSuccessLastMonth" class="icon-ratio-down"></div>
+                                <div class="val-ratio" v-bind:style="{'color':  (totalEmployeeStaffSuccessCurrentMonth - totalEmployeeStaffSuccessLastMonth > 0) ? '#21c74e' : ((totalEmployeeStaffSuccessCurrentMonth - totalEmployeeStaffSuccessLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioEmployeeStaff != 0.0 ? ratioEmployeeStaff : 0.0 }}%</div>
+                            </div>
+                    </div>
+                    <div class="flex align-center last-month">
+                        <div>Tháng trước: {{ totalEmployeeStaffSuccessLastMonth }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex overview-item">
+                <div class="overview-item-content flex">
+                    <div class="title-overview-content flex">
+                        <div class="title-overview">Nghỉ việc</div>
+                    </div>
+                    <div class="flex align-center flex" style="padding: 8px;">
+                            <div class="currentMonth">{{ totalEmployeeTerminationCurrentMonth }}</div>
+                            <div class="flex align-center">
+                                <div v-if="totalEmployeeTerminationCurrentMonth != 0 && totalEmployeeTerminationCurrentMonth > totalEmployeeTerminationLastMonth" class="icon-ratio-up"></div>
+                                <div v-if="totalEmployeeTerminationCurrentMonth != 0 && totalEmployeeTerminationCurrentMonth < totalEmployeeTerminationLastMonth" class="icon-ratio-down"></div>
+                                <div class="val-ratio" v-bind:style="{'color':  (totalEmployeeTerminationCurrentMonth - totalEmployeeTerminationLastMonth > 0) ? '#21c74e' : ((totalEmployeeTerminationCurrentMonth - totalEmployeeTerminationLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioEmployeeTermination != 0.0 ? ratioEmployeeTermination : 0.0}}%</div>
+                            </div>
+                    </div>
+                    <div class="flex align-center last-month">
+                        <div>Tháng trước: {{ totalEmployeeTerminationLastMonth }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    name: "ContentOverview",
+    components:{
+
+    },
+    data() {
+        return {
+            //Tổng số nhân viên đang làm việc
+            totalEmployee: 1000,
+            //Tổng số nhân viên mới tháng này
+            totalNewEmployeeCurrentMonth: 5,
+            //Tổng số nhân viên mới tháng trước
+            totalNewEmployeeLastMonth: 3,
+            //Tỷ lệ nhân viên mới 
+            ratioNewEmployee: 0.0,
+            //Nhân viên thử việc thành công tháng này
+            totalEmployeeStaffSuccessCurrentMonth: 0,
+            //Nhân viên thử việc thành công tháng trước
+            totalEmployeeStaffSuccessLastMonth: 0,
+            //Tỷ lệ nhân viên thử việc thành công
+            ratioEmployeeStaff: 0.0,
+            //Nhân viên nghỉ việc tháng này
+            totalEmployeeTerminationCurrentMonth: 0,
+            //Nhân viên nghỉ việc tháng trước
+            totalEmployeeTerminationLastMonth: 1,
+            //Tỉ lệ nhân viên nghỉ việc
+            ratioEmployeeTermination: 0.0
+        }
+    }, 
+    created() {
+        this.handleRatioNewEmployee();
+        this.handleRatioEmployeeStaff();
+        this.handleRatioEmployeeTermination();
+    },
+    watch:{
+    },
+    computed:{
+    },
+    methods: {
+        //xử lý hiển thị tổng số nhân viên đang làm việc
+        handleTotalEmployee(){
+            return this.totalEmployee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        },
+        //Xử lý hiển thị tổng số nhan viên mới
+        handleRatioNewEmployee(){
+            this.ratioNewEmployee = (Math.abs(1 - (this.totalNewEmployeeCurrentMonth / this.totalNewEmployeeLastMonth)) * 100).toFixed(2);
+        },
+        //Xử lý hiển thị tổng số nhan viên mới
+        handleRatioEmployeeStaff(){
+            this.ratioEmployeeStaff = (Math.abs(1 - (this.totalEmployeeStaffSuccessCurrentMonth / this.totalEmployeeStaffSuccessLastMonth)) * 100).toFixed(2);
+        },
+        //Xử lý hiển thị tổng số nhan viên mới
+        handleRatioEmployeeTermination(){
+            this.ratioEmployeeTermination = (Math.abs( 1 - (this.totalEmployeeTerminationCurrentMonth / this.totalEmployeeTerminationLastMonth)) * 100).toFixed(2);
+        }
+    },
+}
+</script>
+<style scoped>
+.content-overview{
+    height: 200px;
+    padding: 0 16px;
+    max-width: 100%;
+    width: 100%;
+}
+.content-overview .overview-item{
+    padding: 0 8px;
+    width: 25%;
+}
+.overview-item-content{
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 16px 16px 6px 16px;
+    border-radius: 4px;
+    background-color: #fff;
+    min-height: 140px;
+    flex-direction: column;
+}
+.title-overview-content{
+    height: 40px;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.title-overview{
+    font-weight: 700;
+}
+.total-employee{
+    font-size: 36px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.currentMonth{
+    font-size: 36px;
+    font-weight: 600;
+    margin-left: 20px;
+    margin: 0 16px 0 0;
+}
+.icon-ratio-up,.icon-ratio-down{
+    margin: 0 8px 0 0;
+}
+.last-month{
+    color: #65696e;
+    font-size: 14px;
+}
+</style>
