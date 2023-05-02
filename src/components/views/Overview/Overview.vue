@@ -26,6 +26,12 @@ export default {
             isLoadingPage: true
         }
     },
+    beforeCreate(){
+        //Nếu chưa đăng nhập buộc back lại trang login để người dùng đăng nhập
+        // if(this.$store.state.EmployeeID <= 0){
+        //     this.$router.push('/login');
+        // }
+    },
     created() {
         //xét title cho page
         document.title= "Tổng quan | Thông tin nhân sự"

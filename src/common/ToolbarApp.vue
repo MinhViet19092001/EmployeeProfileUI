@@ -8,39 +8,39 @@
         <div class="toolbar-right flex align-center">
             <div class="icon-notifi m-r-16" :title="'Thông báo'"></div>
             <div class="icon-help m-r-16" :title="'Trợ giúp'"></div>
-            <div class="avatar flex align-center m-r-16 justify-center" v-bind:style="'background-color: ' + bgAvatar(currentEmployee.FullName)" @click="showPopupDetail()">
+            <div class="avatar flex align-center m-r-16 justify-center" v-bind:style="'background-color: ' + bgAvatar(currentEmployee.FullName)" @click="showPopupDetail($event)">
                 <div class="bold" style="color: #fff; font-size: 18px">
                   {{ avatar(currentEmployee.FullName) }}
                 </div>
-            </div>
-        </div>
-    </div>
-    <div v-if="isShowInfoDetail" class="user-account-menu">
-        <div class="icon-align"></div>
-        <div class="user-account flex">
-            <div class="avatarBig">
-                <div class="user-account-avatar" v-bind:style="'background-color: ' + bgAvatar(currentEmployee.FullName)">
-                    <div class="bold" style="color: #fff; font-size: 35px">
-                        {{ avatar(currentEmployee.FullName) }}
+                <div v-if="isShowInfoDetail" class="user-account-menu" :style="positionInforDetail">
+                    <div class="icon-align"></div>
+                    <div class="user-account flex">
+                        <div class="avatarBig">
+                            <div class="user-account-avatar" v-bind:style="'background-color: ' + bgAvatar(currentEmployee.FullName)">
+                                <div class="bold" style="color: #fff; font-size: 35px">
+                                    {{ avatar(currentEmployee.FullName) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-info flex">
+                            <div class="fullname">{{ currentEmployee.FullName }}</div>
+                            <div class="username-account">{{ currentEmployee.AccountUserName }}</div>
+                        </div>
+                        <div class="workplace flex align-center justify-center">
+                            <div class="icon icon-work-place"></div>
+                            <div class="workplace-name">{{ currentEmployee.WorkPlace }}</div>
+                        </div>
+                        <div class="change-pass flex align-center">
+                            <i class='bx bx-key'></i>
+                            <div style="font-size: 15px; font-weight: normal !important;">Đổi mật khẩu</div>
+                        </div>
+                        <div class="logout flex align-center justify-center" @click="logout()">
+                            <i class='bx bx-log-out'></i>
+                            <div style="font-size: 15px; font-weight: normal !important;">Đăng xuất</div>
+                        </div> 
                     </div>
                 </div>
             </div>
-            <div class="user-info flex">
-                <div class="fullname">{{ currentEmployee.FullName }}</div>
-                <div class="username-account">{{ currentEmployee.AccountUserName }}</div>
-            </div>
-            <div class="workplace flex align-center justify-center">
-                <div class="icon icon-work-place"></div>
-                <div class="workplace-name">{{ currentEmployee.WorkPlace }}</div>
-            </div>
-            <div class="change-pass flex align-center">
-                <i class='bx bx-key'></i>
-                <div style="font-size: 15px; font-weight: normal !important;">Đổi mật khẩu</div>
-            </div>
-            <div class="logout flex align-center justify-center" @click="logout()">
-                <i class='bx bx-log-out'></i>
-                <div style="font-size: 15px; font-weight: normal !important;">Đăng xuất</div>
-            </div> 
         </div>
     </div>
 </template>
@@ -64,7 +64,12 @@ export default {
                 AccountUserName: 'dmviet@gmail.com'
             },
             //Biến ẩn hiện thông tin chi tiết của tài khoản hiện tại
-            isShowInfoDetail: false
+            isShowInfoDetail: false,
+            //Vị trí popup detail
+            positionInforDetail:{
+                left: '',
+                top: ''
+            }
         }
     },
     created(){
@@ -84,8 +89,8 @@ export default {
             return createBgAvatar(this.avatar(name));
         },
         //Show popup detail
-        showPopupDetail(){
-            this.isShowInfoDetail = !this.isShowInfoDetail
+        showPopupDetail(e){
+            this.isShowInfoDetail = !this.isShowInfoDetail;
         },
         //Ânr đi infor detail
         hideInforDetail(){
@@ -140,7 +145,8 @@ export default {
 }
 .user-account-menu{
     position: absolute;
-    left: 1603px;
+    top: 65px;
+    right: 15px;
     width: 302px;
     height: auto;
     cursor: default;
@@ -187,20 +193,6 @@ export default {
     border: 1px solid #e0e0e0;
     margin-bottom: 8px;
     padding: 0 8px;
-}
-.icon-align {
-    width: 10px;
-    height: 10px;
-    display: block;
-    right: 15px;
-    top: -5px;
-    position: absolute;
-    background-color: #fff;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
 }
 .change-pass{
     height: 40px;

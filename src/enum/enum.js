@@ -1,5 +1,3 @@
-
-  
 /**
  * Mã màu avatar
  */
@@ -14,4 +12,15 @@ export const colorCode = {
     fuchsia: 3,
     //Màu orange
     orange: 4,
+};
+
+export const dataType = {
+    //Default
+    default: 0,
+    //number
+    number: 1,
+    //currency
+    currency: 2,
+    //date
+    date: 3
 };

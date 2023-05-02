@@ -61,6 +61,7 @@ export default {
 }
 .app-container{
     height: calc(100% - 56px);
+    overflow-y: scroll;
 }
 .side-bar-app{
     height: 100%;

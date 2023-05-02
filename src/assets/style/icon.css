@@ -308,3 +308,48 @@
     height: 24px;
     background: url("../images/Icon.svg") -144px 0 no-repeat;
 }
+.icon-close{
+    width: 24px;
+    height: 24px;
+    background: url("../images/Icon.svg") 0 -72px no-repeat;
+    cursor: pointer;
+}
+.icon-align {
+    width: 10px;
+    height: 10px;
+    display: block;
+    right: 15px;
+    top: -5px;
+    position: absolute;
+    background-color: #fff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.icon-search { 
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-image: url("../images/Icon.svg");
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: -48px -26px;
+    -webkit-mask-position: -48px -27px;
+    background-color: #9fa4b4;
+	width: 24px;
+	height: 24px;
+    position: relative;
+    top: 7px;
+    left: 14px;
+}
+.icon-btn-export{
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-image: url("../images/Icon.svg");
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: -24px -96px;
+    -webkit-mask-position: -24px -96px;
+    background-color: #686c7b;
+	width: 24px;
+	height: 24px;
+}

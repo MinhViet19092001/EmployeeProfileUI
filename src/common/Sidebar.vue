@@ -146,6 +146,7 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 .sidebar-item-list{
     flex-grow: 1;
@@ -188,6 +189,9 @@ export default {
     font-weight: 500;
     z-index: 20;
     color: #869ab8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .sidebar-item:hover .item-float-active{
     display: block !important;

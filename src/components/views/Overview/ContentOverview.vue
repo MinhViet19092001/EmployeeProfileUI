@@ -8,7 +8,7 @@
                     </div>
                     <div class="flex align-center">
                         <div class="icon-human"></div>
-                        <div class="total-employee">{{ handleTotalEmployee() }}</div>
+                        <div class="total-employee total-emp" @click="showTotalEmployee()">{{ handleTotalEmployee() }}</div>
                     </div>
                 </div>
             </div>
@@ -18,11 +18,11 @@
                         <div class="title-overview">Nhân viên mới</div>
                     </div>
                     <div class="flex align-center flex" style="padding: 8px;">
-                            <div class="currentMonth">{{ totalNewEmployeeCurrentMonth }}</div>
+                            <div class="currentMonth total-emp">{{ totalNewEmployeeCurrentMonth }}</div>
                             <div class="flex align-center">
-                                <div v-if="totalNewEmployeeCurrentMonth != 0 && totalNewEmployeeCurrentMonth > totalNewEmployeeLastMonth" class="icon-ratio-up"></div>
-                                <div v-if="totalNewEmployeeCurrentMonth != 0 && totalNewEmployeeCurrentMonth < totalNewEmployeeLastMonth" class="icon-ratio-down"></div>
-                                <div class="val-ratio" v-bind:style="{'color':  (totalNewEmployeeCurrentMonth - totalNewEmployeeLastMonth > 0) ? '#21c74e' : ((totalNewEmployeeCurrentMonth - totalNewEmployeeLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioNewEmployee != 0.0 ? ratioNewEmployee : 0.0}}%</div>
+                                <div v-if="ratioNewEmployee > 0 && totalNewEmployeeCurrentMonth > totalNewEmployeeLastMonth" class="icon-ratio-up"></div>
+                                <div v-if="ratioNewEmployee > 0 && totalNewEmployeeCurrentMonth < totalNewEmployeeLastMonth" class="icon-ratio-down"></div>
+                                <div class="val-ratio" v-bind:style="{'color':  (totalNewEmployeeCurrentMonth - totalNewEmployeeLastMonth > 0) ? '#21c74e' : ((totalNewEmployeeCurrentMonth - totalNewEmployeeLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioNewEmployee > 0 ? ratioNewEmployee : '0.0'}}%</div>
                             </div>
                     </div>
                     <div class="flex align-center last-month">
@@ -36,11 +36,11 @@
                         <div class="title-overview">Thử việc thành công</div>
                     </div>
                     <div class="flex align-center flex" style="padding: 8px;">
-                            <div class="currentMonth">{{ totalEmployeeStaffSuccessCurrentMonth }}</div>
+                            <div class="currentMonth total-emp">{{ totalEmployeeStaffSuccessCurrentMonth }}</div>
                             <div class="flex align-center">
-                                <div v-if="totalEmployeeStaffSuccessCurrentMonth != 0 && totalEmployeeStaffSuccessCurrentMonth > totalEmployeeStaffSuccessLastMonth" class="icon-ratio-up"></div>
-                                <div v-if="totalEmployeeStaffSuccessCurrentMonth != 0 && totalEmployeeStaffSuccessCurrentMonth < totalEmployeeStaffSuccessLastMonth" class="icon-ratio-down"></div>
-                                <div class="val-ratio" v-bind:style="{'color':  (totalEmployeeStaffSuccessCurrentMonth - totalEmployeeStaffSuccessLastMonth > 0) ? '#21c74e' : ((totalEmployeeStaffSuccessCurrentMonth - totalEmployeeStaffSuccessLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioEmployeeStaff != 0.0 ? ratioEmployeeStaff : 0.0 }}%</div>
+                                <div v-if="ratioEmployeeStaff > 0 && totalEmployeeStaffSuccessCurrentMonth > totalEmployeeStaffSuccessLastMonth" class="icon-ratio-up"></div>
+                                <div v-if="ratioEmployeeStaff > 0 && totalEmployeeStaffSuccessCurrentMonth < totalEmployeeStaffSuccessLastMonth" class="icon-ratio-down"></div>
+                                <div class="val-ratio" v-bind:style="{'color':  (totalEmployeeStaffSuccessCurrentMonth - totalEmployeeStaffSuccessLastMonth > 0) ? '#21c74e' : ((totalEmployeeStaffSuccessCurrentMonth - totalEmployeeStaffSuccessLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioEmployeeStaff > 0 ? ratioEmployeeStaff : '0.0' }}%</div>
                             </div>
                     </div>
                     <div class="flex align-center last-month">
@@ -54,11 +54,11 @@
                         <div class="title-overview">Nghỉ việc</div>
                     </div>
                     <div class="flex align-center flex" style="padding: 8px;">
-                            <div class="currentMonth">{{ totalEmployeeTerminationCurrentMonth }}</div>
+                            <div class="currentMonth total-emp">{{ totalEmployeeTerminationCurrentMonth }}</div>
                             <div class="flex align-center">
-                                <div v-if="totalEmployeeTerminationCurrentMonth != 0 && totalEmployeeTerminationCurrentMonth > totalEmployeeTerminationLastMonth" class="icon-ratio-up"></div>
-                                <div v-if="totalEmployeeTerminationCurrentMonth != 0 && totalEmployeeTerminationCurrentMonth < totalEmployeeTerminationLastMonth" class="icon-ratio-down"></div>
-                                <div class="val-ratio" v-bind:style="{'color':  (totalEmployeeTerminationCurrentMonth - totalEmployeeTerminationLastMonth > 0) ? '#21c74e' : ((totalEmployeeTerminationCurrentMonth - totalEmployeeTerminationLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioEmployeeTermination != 0.0 ? ratioEmployeeTermination : 0.0}}%</div>
+                                <div v-if="ratioEmployeeTermination > 0 && totalEmployeeTerminationCurrentMonth > totalEmployeeTerminationLastMonth" class="icon-ratio-up"></div>
+                                <div v-if="ratioEmployeeTermination > 0 && totalEmployeeTerminationCurrentMonth < totalEmployeeTerminationLastMonth" class="icon-ratio-down"></div>
+                                <div class="val-ratio" v-bind:style="{'color':  (totalEmployeeTerminationCurrentMonth - totalEmployeeTerminationLastMonth > 0) ? '#21c74e' : ((totalEmployeeTerminationCurrentMonth - totalEmployeeTerminationLastMonth < 0) ? '#FF8D8D' : '#6C757D')}">{{ ratioEmployeeTermination > 0 ? ratioEmployeeTermination : '0.0' }}%</div>
                             </div>
                     </div>
                     <div class="flex align-center last-month">
@@ -68,12 +68,18 @@
             </div>
         </div>
     </div>
+    <PopupTotalEmployeeVue 
+        v-if="isShowPopupTotalEmployee"
+        @closePopup="isShowPopupTotalEmployee = $event"
+    >
+    </PopupTotalEmployeeVue>
 </template>
 <script>
+import PopupTotalEmployeeVue from './PopupTotalEmployee.vue';
 export default {
     name: "ContentOverview",
     components:{
-
+        PopupTotalEmployeeVue
     },
     data() {
         return {
@@ -96,7 +102,15 @@ export default {
             //Nhân viên nghỉ việc tháng trước
             totalEmployeeTerminationLastMonth: 1,
             //Tỉ lệ nhân viên nghỉ việc
-            ratioEmployeeTermination: 0.0
+            ratioEmployeeTermination: 0.0,
+            //Biến showPopup show tổng số nhân viên
+            isShowPopupTotalEmployee: false,
+            //Biến showPopup show tổng số nhân viên mới
+            isShowPopupTotalNewEmployee: false,
+            //Biến showPopup show tổng số nhân viên thử việc thành công
+            isShowPopupTotalEmployeeStaff: false,
+            //Biến showPopup show tổng số nhân viên nghỉ việc tháng này
+            isShowPopupTotalEmployeeTermination: false,
         }
     }, 
     created() {
@@ -115,15 +129,34 @@ export default {
         },
         //Xử lý hiển thị tổng số nhan viên mới
         handleRatioNewEmployee(){
-            this.ratioNewEmployee = (Math.abs(1 - (this.totalNewEmployeeCurrentMonth / this.totalNewEmployeeLastMonth)) * 100).toFixed(2);
+            if(this.totalNewEmployeeLastMonth > 0){
+                this.ratioNewEmployee = (Math.abs(1 - (this.totalNewEmployeeCurrentMonth / this.totalNewEmployeeLastMonth)) * 100).toFixed(2);
+            }
+            else{
+                this.ratioNewEmployee = 0.0;
+            }
         },
         //Xử lý hiển thị tổng số nhan viên mới
         handleRatioEmployeeStaff(){
-            this.ratioEmployeeStaff = (Math.abs(1 - (this.totalEmployeeStaffSuccessCurrentMonth / this.totalEmployeeStaffSuccessLastMonth)) * 100).toFixed(2);
+            if(this.totalEmployeeStaffSuccessLastMonth > 0){
+                this.ratioEmployeeStaff = (Math.abs(1 - (this.totalEmployeeStaffSuccessCurrentMonth / this.totalEmployeeStaffSuccessLastMonth)) * 100).toFixed(2);
+            }
+            else{
+                this.ratioEmployeeStaff = 0.0;
+            }
         },
         //Xử lý hiển thị tổng số nhan viên mới
         handleRatioEmployeeTermination(){
-            this.ratioEmployeeTermination = (Math.abs( 1 - (this.totalEmployeeTerminationCurrentMonth / this.totalEmployeeTerminationLastMonth)) * 100).toFixed(2);
+            if(this.totalEmployeeTerminationLastMonth > 0){
+                this.ratioEmployeeTermination = (Math.abs( 1 - (this.totalEmployeeTerminationCurrentMonth / this.totalEmployeeTerminationLastMonth)) * 100).toFixed(2);
+            }
+            else{
+                this.ratioEmployeeTermination = 0.0;
+            }
+        },
+        //Hiển thị popup tổng số nhân viên
+        showTotalEmployee(){
+            this.isShowPopupTotalEmployee = true;
         }
     },
 }
@@ -131,7 +164,7 @@ export default {
 <style scoped>
 .content-overview{
     height: 200px;
-    padding: 0 16px;
+    /* /* padding: 0 16px; */
     max-width: 100%;
     width: 100%;
 }
@@ -176,4 +209,10 @@ export default {
     color: #65696e;
     font-size: 14px;
 }
+.total-emp:hover{
+    cursor: pointer;
+    color: #2566e9;
+    text-decoration: underline;
+}
+
 </style>
