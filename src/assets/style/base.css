@@ -94,3 +94,9 @@ input{
     font-size: 14px;
     color: #999;
 }
+input[disabled]{
+    background-color: #ebecf2;
+}
+input[disabled]:hover{
+    border-color: #e0e1e4 !important;
+}

@@ -353,3 +353,178 @@
 	width: 24px;
 	height: 24px;
 }
+.icon-dropdown{
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-image: url("../images/Icon.svg");
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: -76px -25px;
+    -webkit-mask-position: -76px -25px;
+    background-color: #686c7b;
+	width: 24px;
+	height: 24px;
+}
+.icon-prev-page{
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-image: url("../images/Icon.svg");
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: -77px -49px;
+    -webkit-mask-position: -77px -49px;
+    background-color: #686c7b;
+	width: 24px;
+	height: 24px;
+    cursor: pointer;
+}
+.icon-next-page{
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-image: url("../images/Icon.svg");
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: -46px -49px;
+    -webkit-mask-position: -46px -49px;
+    background-color: #686c7b;
+	width: 24px;
+	height: 24px;
+    cursor: pointer;
+}
+.icon-organization{
+    width: 24px;
+    height: 24px;
+    -webkit-mask-image: url("../images/Icon.svg");
+    -moz-mask-image: url("../images/Icon.svg");
+    -ms-mask-image: url("../images/Icon.svg");
+    -o-mask-image: url("../images/Icon.svg");
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-position: -96px -1104px;
+    -moz-mask-position: -96px -1104px;
+    -ms-mask-position: -96px -1104px;
+    -o-mask-position: -96px -1104px;
+    mask-position: -96px -1104px;
+    -webkit-mask-repeat: no-repeat;
+    -moz-mask-repeat: no-repeat;
+    -ms-mask-repeat: no-repeat;
+    -o-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: #869ab8;
+}
+.icon-jobposition{
+    width: 24px;
+    height: 24px;
+    -webkit-mask-image: url("../images/Icon.svg");
+    -moz-mask-image: url("../images/Icon.svg");
+    -ms-mask-image: url("../images/Icon.svg");
+    -o-mask-image: url("../images/Icon.svg");
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-position: -217px -23px;
+    -moz-mask-position: -217px -23px;
+    -ms-mask-position: -217px -23px;
+    -o-mask-position: -217px -23px;
+    mask-position: -217px -23px;
+    -webkit-mask-repeat: no-repeat;
+    -moz-mask-repeat: no-repeat;
+    -ms-mask-repeat: no-repeat;
+    -o-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: #869ab8;
+}
+.icon-user-role{
+    width: 24px;
+    height: 24px;
+    -webkit-mask-image: url("../images/Icon.svg");
+    -moz-mask-image: url("../images/Icon.svg");
+    -ms-mask-image: url("../images/Icon.svg");
+    -o-mask-image: url("../images/Icon.svg");
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-position: -145px -457px;
+    -moz-mask-position: -145px -457px;
+    -ms-mask-position: -145px -457px;
+    -o-mask-position: -145px -457px;
+    mask-position: -145px -457px;
+    -webkit-mask-repeat: no-repeat;
+    -moz-mask-repeat: no-repeat;
+    -ms-mask-repeat: no-repeat;
+    -o-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: #869ab8;
+}
+
+.icon-user-list{
+    width: 24px;
+    height: 24px;
+    -webkit-mask-image: url("../images/Icon.svg");
+    -moz-mask-image: url("../images/Icon.svg");
+    -ms-mask-image: url("../images/Icon.svg");
+    -o-mask-image: url("../images/Icon.svg");
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-position:     -167px -314px;
+    -moz-mask-position:     -167px -314px;
+    -ms-mask-position:     -167px -314px;
+    -o-mask-position:    -167px -314px;
+    mask-position:     -167px -314px;
+    -webkit-mask-repeat: no-repeat;
+    -moz-mask-repeat: no-repeat;
+    -ms-mask-repeat: no-repeat;
+    -o-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: #869ab8;
+
+}
+.icon-plus{
+    width: 24px;
+    height: 24px;
+    -webkit-mask-image: url("../images/Icon.svg");
+    -moz-mask-image: url("../images/Icon.svg");
+    -ms-mask-image: url("../images/Icon.svg");
+    -o-mask-image: url("../images/Icon.svg");
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-position: -24px -24px;
+    -moz-mask-position: -24px -24px;
+    -ms-mask-position: -24px -24px;
+    -o-mask-position: -24px -24px;
+    mask-position: -24px -24px;
+    -webkit-mask-repeat: no-repeat;
+    -moz-mask-repeat: no-repeat;
+    -ms-mask-repeat: no-repeat;
+    -o-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: #fff;
+}
+.icon-hidden {
+    display: none;
+}
+.icon-pencil {
+    width: 24px;
+    height: 24px;
+    background: url("../images/Icon.svg") -192px -50px no-repeat;
+}
+.icon-delete{
+    width: 24px;
+    height: 24px;
+    background: url("../images/Icon.svg") -240px -74px no-repeat;
+}
+.icon-back{
+    width: 24px;
+    height: 24px;
+    background: url("../images/Icon.svg") -170px -45px  no-repeat;
+}
+.icon-export{
+    width: 24px;
+    height: 24px;
+    -webkit-mask-image: url("../images/Icon.svg");
+    -moz-mask-image: url("../images/Icon.svg");
+    -ms-mask-image: url("../images/Icon.svg");
+    -o-mask-image: url("../images/Icon.svg");
+    mask-image: url("../images/Icon.svg");
+    -webkit-mask-position: -24px -96px;
+    -moz-mask-position: -24px -96px;
+    -ms-mask-position: -24px -96px;
+    -o-mask-position: -24px -96px;
+    mask-position: -24px -96px;
+    -webkit-mask-repeat: no-repeat;
+    -moz-mask-repeat: no-repeat;
+    -ms-mask-repeat: no-repeat;
+    -o-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: #686c7b;
+}

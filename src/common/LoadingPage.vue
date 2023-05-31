@@ -1,47 +1,60 @@
 <template>
-    <div class="flex flex-column">
-        <div class="iconLoading loadingPage"></div>
-        <div class="content-loading">Đang tải dữ liệu</div>
-    </div>
+  <div class="img-loading"><div></div><div></div><div></div><div></div></div>
 </template>
 <script>
 export default {
-    name:"LoadingPage",
-    data() {
-        return {
-        }
-    },    
+  name: 'LoadingPage',
+  components: {
+
+  },
+  created() {
+      
+  },
+  data() {
+      return {
+          
+      }
+  },
+  methods: {
+      
+  },
 }
 </script>
 <style scoped>
-.iconLoading{
-    position: absolute;
-    left: 50%;
-    top: 50%;
+.img-loading {
+  display: inline-block;
+  position: relative;
+  top: 40%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
 }
-.loadingPage{
-  border: 8px solid #f3f3f3;
-  border-radius: 50%;  
-  border-top: 8px solid #3498db;
-  width: 30px;
-  height: 30px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-  background-color: #fff;
+.img-loading div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  animation: img-loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #0066ff transparent transparent transparent;
 }
-.content-loading{
-    width: fit-content;
-    position: absolute;
-    left: 48.5%;
-    top: 55%;
+.img-loading div:nth-child(1) {
+  animation-delay: -0.45s;
 }
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+.img-loading div:nth-child(2) {
+  animation-delay: -0.3s;
 }
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.img-loading div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes img-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

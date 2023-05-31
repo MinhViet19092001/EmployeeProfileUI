@@ -24,3 +24,13 @@ export const dataType = {
     //date
     date: 3
 };
+
+
+/**
+ * Số bản ghi trên trang default và trang số hiện tại
+ */
+export const pageDefault = {
+    pageSize: 50,
+    pageNumber: 1,
+  };
+  

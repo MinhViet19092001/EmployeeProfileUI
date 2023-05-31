@@ -46,6 +46,7 @@
 </template>
 <script>
 import { createAvatar, createBgAvatar } from "../common/avatar";
+import EmployeeAPI from "@/api/EmployeeAPI";
 export default {
     name: "ToolbarApp",
     component: {
@@ -59,9 +60,6 @@ export default {
             },
             //Thông tin nhân viên đăng nhập
             currentEmployee: {
-                FullName: 'Dương Minh Việt',
-                WorkPlace: 'Văn phòng Tổng công ty',
-                AccountUserName: 'dmviet@gmail.com'
             },
             //Biến ẩn hiện thông tin chi tiết của tài khoản hiện tại
             isShowInfoDetail: false,
@@ -73,12 +71,23 @@ export default {
         }
     },
     created(){
-        this.EmployeeID = this.$store.EmployeeID;
+        this.EmployeeID = this.$store.state.EmployeeID;
+        var me = this;
+        //Lấy ra thông tin nhân viên vừa dăng nhập
+        EmployeeAPI.getById(this.EmployeeID).then(
+            (res) => {
+                me.currentEmployee.FullName = res?.fullName;
+                me.currentEmployee.AccountUserName = res?.emailUserName;
+                me.currentEmployee.WorkPlace = res?.organizationUnitName;
+            }
+        )
     },
     methods: {
         reloadApp(){
-            window.location.reload();
-            this.$router.push('/overview');
+            setTimeout(() => {
+                this.$router.push('/overview');
+            }, 200);
+            this.$emit('back-overview', true);
         },
         //tạo tên avatar
         avatar(name) {
@@ -158,6 +167,7 @@ export default {
     text-align: center;
     display: flex;
     flex-direction: column;
+    z-index: 9999;
 }
 .user-account{
    flex-direction: column;

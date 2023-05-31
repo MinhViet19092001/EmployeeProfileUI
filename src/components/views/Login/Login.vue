@@ -2,11 +2,11 @@
   <div class="box" v-if="formLogin">
     <div class="container">
       <div class="top">
-        <header>Laptop HN</header>
+        <header>Máy tính Minh Việt</header>
       </div>
 
       <div class="input-field" :class="{'error-empty': usernameEmpty}">
-        <input ref="username" type="text" class="input" placeholder="Số điện thoại/email" id="" v-model="username" @focusin="focusUserName()" tabindex="1" v-on:keyup.enter="login()"/>
+        <input ref="username" type="text" class="input" placeholder="Email" id="" v-model="username" @focusin="focusUserName()" tabindex="1" v-on:keyup.enter="login()"/>
         <i class="bx bx-user"></i>
         <div v-if="usernameEmpty" class="text-error">Tên đăng nhập không được để trống.</div>
       </div>
@@ -114,10 +114,6 @@ export default {
         this.passwordEmpty = false;
         this.loginError = false;
     },
-    employeeID(){
-      //gán giá trị employeeID của người dùng đang đăng nhập
-      this.$store.commit('login',this.employeeID);
-    },
   },
   computed:{
   },
@@ -143,6 +139,8 @@ export default {
                   me.loginError = false; 
                   me.$router.push('/overview');
                   me.employeeID = res.data.EmployeeID;
+                  this.$store.commit('login',this.employeeID);
+                  me.$emit('login-success', true);
                 }
                 else{
                   me.readyLogin = true;
