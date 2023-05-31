@@ -1,24 +1,20 @@
 <template>
     <LoadingPage v-if="isLoadingPage"/>
-    <BaseView v-if="!isLoadingPage">
-        <template v-slot:content-app>
-            <ToolbarOverview />
-            <ContentOverview />
-        </template>
-    </BaseView>
+    <div class="h-full w-full" v-if="!isLoadingPage">
+        <ToolbarOverview v-if="!isLoadingPage"/>
+        <ContentOverview v-if="!isLoadingPage"/>
+    </div>
 </template>
 <script>
-import BaseView from '../../../common/BaseView.vue'
 import LoadingPage from '@/common/LoadingPage.vue';
 import ToolbarOverview from './ToolbarOverview.vue';
 import ContentOverview from './ContentOverview.vue';
 export default {  
     name: "Overview",
     components: {
-        LoadingPage,
-        BaseView,
         ToolbarOverview,
-        ContentOverview
+        ContentOverview,
+        LoadingPage
     },
     data(){
         return{
@@ -27,10 +23,6 @@ export default {
         }
     },
     beforeCreate(){
-        //Nếu chưa đăng nhập buộc back lại trang login để người dùng đăng nhập
-        // if(this.$store.state.EmployeeID <= 0){
-        //     this.$router.push('/login');
-        // }
     },
     created() {
         //xét title cho page
@@ -40,7 +32,7 @@ export default {
             this.isLoadingPage = false;
         }, 2000);
     },
-    methods(){
+    methods: {
         
     }
 }

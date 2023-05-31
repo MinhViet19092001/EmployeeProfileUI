@@ -1,14 +1,14 @@
 <template>
     <div class="side-bar-app" v-bind:style="{'width': widthSideBar}">
         <div class="sidebar-item-list">
-            <div v-for="item in lstSidebar" :key="item.ID" class="sidebar-item" @click="selectTab($event)">
-                <a class="link-wrapper" :href="item.Link">
+            <div v-for="item in lstSidebar" :key="item.ID" class="sidebar-item" @click="selectTab(item)">
+                <router-link class="link-wrapper" :to="{ path: '/' + item.Link }">
                     <div class="item-float-active" v-bind:style="{'display': item.Display}"></div>
                     <div class="item-content">
-                        <div class="icon" v-bind:class="item.Icon" v-bind:style="{'background-color': item.Display == 'block' ? '#fff' : '#869ab8'}"></div>
-                        <div class="icon-text" v-bind:style="{'color': item.Display == 'block' ? '#fff' : '#869ab8', 'display': showText}">{{ item.Text }}</div>
+                        <div class="icon" v-bind:class="item.Icon" v-bind:style="{'background-color': item.Display == 'block' ? '#fff ' : '#869ab8'}"></div>
+                        <div class="icon-text" v-bind:style="{'color': item.Display == 'block' ? '#fff !important' : '#869ab8 ', 'display': showText}">{{ item.Text }}</div>
                     </div>
-                </a>
+                </router-link>
             </div>
         </div>
         <div class="sidebar-item setting-item" @click="hideSideBar()">
@@ -22,6 +22,7 @@
     </div>
 </template>
 <script>
+import {useRoute} from "vue-router";
 export default {
     name: "SideBarApp",
     components:{
@@ -34,80 +35,136 @@ export default {
                     ID: 1,
                     Text: "Tổng quan",
                     Icon: "icon-overview",
-                    Link: "./overview",
+                    Link: "overview",
                     Display: 'none'
                 },
                 {
                     ID: 2,
                     Text: "Hồ sơ",
                     Icon: "icon-employee",
-                    Link: "./employee",
+                    Link: "employee",
                     Display: 'none'
                 },
                 {
                     ID: 3,
                     Text: "Hợp đồng",
                     Icon: "icon-contract",
-                    Link: "./contract",
+                    Link: "contract",
                     Display: 'none'
                 },
-                {
-                    ID: 4,
-                    Text: "Bổ nhiệm",
-                    Icon: "icon-appoint",
-                    Link: "./appoint",
-                    Display: 'none'
-                },
-                {
-                    ID: 5,
-                    Text: "Miễn nhiệm",
-                    Icon: "icon-dismiss",
-                    Link: "./dismiss",
-                    Display: 'none'
-                },
-                {
-                    ID: 6,
-                    Text: "Thuyên chuyển",
-                    Icon: "icon-displacement",
-                    Link: "./displacement",
-                    Display: 'none'
-                },
-                {
-                    ID: 7,
-                    Text: "Nghỉ việc",
-                    Icon: "icon-termination",
-                    Link: "./termination",
-                    Display: 'none'
-                },
-                {
-                    ID: 8,
-                    Text: "Báo cáo",
-                    Icon: "icon-report",
-                    Link: "./report",
-                    Display: 'none'
-                },
+                // {
+                //     ID: 4,
+                //     Text: "Bổ nhiệm",
+                //     Icon: "icon-appoint",
+                //     Link: "appoint",
+                //     Display: 'none'
+                // },
+                // {
+                //     ID: 5,
+                //     Text: "Miễn nhiệm",
+                //     Icon: "icon-dismiss",
+                //     Link: "dismiss",
+                //     Display: 'none'
+                // },
+                // {
+                //     ID: 6,
+                //     Text: "Thuyên chuyển",
+                //     Icon: "icon-displacement",
+                //     Link: "displacement",
+                //     Display: 'none'
+                // },
+                // {
+                //     ID: 7,
+                //     Text: "Nghỉ việc",
+                //     Icon: "icon-termination",
+                //     Link: "termination",
+                //     Display: 'none'
+                // },
                 {
                     ID: 9,
-                    Text: "Thiết lập",
-                    Icon: "icon-setting",
-                    Link: "./setting",
+                    Text: "Đơn vị",
+                    Icon: "icon-organization",
+                    Link: "organization",
                     Display: 'none'
                 },
+                {
+                    ID: 10,
+                    Text: "Vị trí công việc",
+                    Icon: "icon-jobposition",
+                    Link: "jobposition",
+                    Display: 'none'
+                },
+                {
+                    ID: 11,
+                    Text: "Vai trò người dùng",
+                    Icon: "icon-user-role",
+                    Link: "user-role",
+                    Display: 'none'
+                },
+                {
+                    ID: 12,
+                    Text: "Quản lý người dùng ",
+                    Icon: "icon-user-list",
+                    Link: "user-list",
+                    Display: 'none'
+                },
+                // {
+                //     ID: 8,
+                //     Text: "Báo cáo",
+                //     Icon: "icon-report",
+                //     Link: "report",
+                //     Display: 'none'
+                // }
+                // {
+                //     ID: 11,
+                //     Text: "Thiết lập",
+                //     Icon: "icon-setting",
+                //     Link: "setting",
+                //     Display: 'none'
+                // },
             ],
             widthSideBar: '210px',
             showText: 'block',
             isShowSideBar: true
         }
     },
+    props:{
+        isBackOverview:{
+            type: Boolean
+        }
+    },
     created() {
+        const url = window.location.href;
         //auto chọn vào form overview khi created
-        this.lstSidebar.forEach(element => {
-            if(element.ID == 1){
-                element.Display = 'block';
-            }
-        });
+        if(url.includes('/login') || url.includes('/overview')){
+            this.lstSidebar.forEach(element => {
+                if(element.ID == 1){
+                    element.Display = 'block';
+                }
+                else{
+                    element.Display = 'none'
+                }
+            });
+        }
+        else{
+            this.lstSidebar.forEach(element => {
+                if(url.includes(element.Link)){
+                    element.Display = 'block';
+                }
+                else{
+                    element.Display = 'none'
+                }
+            });
+        }
+    },
+    mounted()
+    {
+        
     },
     watch:{
+        pathUrl(){
+            console.log(this.pathUrl);
+        },
         isShowSideBar(){
             if(this.isShowSideBar){
                 this.widthSideBar = '210px';
@@ -116,6 +173,18 @@ export default {
             else{
                 this.widthSideBar = '70px';
                 this.showText = 'none';
+            }
+        },
+        isBackOverview(){
+            if(this.isBackOverview == true){
+                this.lstSidebar.forEach(element => {
+                    if(element.ID == 1){
+                        element.Display = 'block';
+                    }
+                    else{
+                        element.Display = 'none';
+                    }
+                });
             }
         }
     },
@@ -169,7 +238,7 @@ export default {
     width: calc(100% - 22px);
     height: 100%;
     margin-left: 12px;
-    opacity: .5;
+    opacity: .5 !important;
     position: absolute;
 }
 .item-content{

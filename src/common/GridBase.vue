@@ -18,22 +18,19 @@
         </div>
         <div class="content-paging flex">
              <DxDataGrid
+                id="gridContainer"
                 :data-source="dataSource"
-                :show-borders="true"
-                key-expr='EmployeeID'
-                :allow-column-resizing="true"
-                :column-resizing-mode="'widget'"
-                :column-min-width="50"
             >
-                <div v-for="(col,index) in columns" :key="index">
-                    {{ console(col) }}
+                <template v-for="col in columns" :key="col">
                     <DxColumn
                         :visible="col.IsVisible"
+                        :width="250"
                         :caption="col.Caption"
                         :data-field="col.FieldName"
                         :alignment="handleAlignment(col.DataType)"
+                        :hover-state-enabled="true"
                     />
-                </div>
+                </template>
             </DxDataGrid>
         </div>
         <div class="footer-paging"></div>
@@ -41,44 +38,17 @@
 </template>
 <script>
 import  { dataType }  from '../enum/enum'
-import {DxDataGrid,DxColumn} from 'devextreme-vue/data-grid';
+import {DxDataGrid, DxColumn, DxSorting, DxPager, DxPaging} from 'devextreme-vue/data-grid';
 export default {
     name:"GridBase",
     components:{
         DxDataGrid,
         DxColumn,
+        DxSorting,
+        DxPager,
+        DxPaging
     },
     props:{
-        // //danh sách data trả về
-        // dataSource: [
-        //     {
-        //         EmployeeID: 1,
-        //         EmployeeCode: "MV001",
-        //         FullName: "Dương Minh Việt",
-        //         BirthDay: "19/09/2001"
-        //     }
-        // ],
-        // //danh sách columns hiẻn thị
-        // columns: [
-        //     {
-        //         FieldName: 'EmployeeCode',
-        //         Caption: 'Mã nhân viên',
-        //         DataType: 0,
-        //         IsVisible: true
-        //     },
-        //     {
-        //         FieldName: 'FullName',
-        //         Caption: 'Họ và tên',
-        //         DataType: 0,
-        //         IsVisible: true
-        //     },
-        //     {
-        //         FieldName: 'BirthDay',
-        //         Caption: 'Ngày sinh',
-        //         DataType: 3,
-        //         IsVisible: true
-        //     }
-        // ]
     },
     data(){
         return {
@@ -88,7 +58,144 @@ export default {
                     EmployeeID: 1,
                     EmployeeCode: "MV001",
                     FullName: "Dương Minh Việt",
-                    BirthDay: "19/09/2001"
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
+                },
+                {
+                    EmployeeID: 1,
+                    EmployeeCode: "MV001",
+                    FullName: "Dương Minh Việt",
+                    OrganizaitonUnitName: "Tổng công ty",
+                    JobPositionName: "Lập trình viên",
+                    EmployeeNatureName: "Chính thức",
+                    HireDate: "19/09/2001",
+                    ReceiveDate: "19/09/2001",
+                    Status: "Đang hoạt động"
                 }
             ],
             columns: [
@@ -105,9 +212,39 @@ export default {
                     IsVisible: true
                 },
                 {
-                    FieldName: 'BirthDay',
-                    Caption: 'Ngày sinh',
+                    FieldName: 'OrganizaitonUnitName',
+                    Caption: 'Đơn vị công tác',
+                    DataType: 0,
+                    IsVisible: true
+                },
+                {
+                    FieldName: 'JobPositionName',
+                    Caption: 'Vị trị công việc',
+                    DataType: 0,
+                    IsVisible: true
+                },
+                {
+                    FieldName: 'EmployeeNatureName',
+                    Caption: 'Tính chất công việc',
+                    DataType: 0,
+                    IsVisible: true
+                },
+                {
+                    FieldName: 'HireDate',
+                    Caption: 'Ngày thử việc',
                     DataType: 3,
+                    IsVisible: true
+                },
+                {
+                    FieldName: 'ReceiveDate',
+                    Caption: 'Ngày chính thức',
+                    DataType: 3,
+                    IsVisible: true
+                },
+                {
+                    FieldName: 'Status',
+                    Caption: 'Trạng thái',
+                    DataType: 0,
                     IsVisible: true
                 }
             ]
@@ -182,4 +319,14 @@ export default {
 .icon-btn-export{
     margin-right: 4px;
 }
+.content-paging{
+    height: calc(100% - 62px);
+}
+#gridContainer{
+    width: 100%;
+    height: 100%;
+}
+</style>
+<style>
+@import url("../assets/style/baseGrid.css");
 </style>

@@ -10,6 +10,10 @@ class LoginAPI{
     checkLogin(userName, passWord){
         return HTTP.get(`${this.controller}/checkAccountLogin?userName=${userName}&passWord=${passWord}`)
     }
+
+    getUserRole(employeeID){
+        return HTTP.get(`${this.controller}/GetUserRole/${employeeID}`);
+    }
 }
 
 export default new LoginAPI();

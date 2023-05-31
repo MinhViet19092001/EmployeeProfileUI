@@ -67,19 +67,49 @@
                 </div>
             </div>
         </div>
+        <div class="content-overview-chart flex">
+            <DxChart
+                id="chart"
+                :data-source="populationData"
+                title="Số lượng nhân sự theo quý trong năm"
+            >
+                <DxArgumentAxis :tick-interval="10">
+                <DxLabel format="decimal"/>
+                </DxArgumentAxis>
+                <DxSeries type="bar"/>
+                <DxLegend :visible="false"/>
+            </DxChart>
+        </div>
     </div>
+
     <PopupTotalEmployeeVue 
         v-if="isShowPopupTotalEmployee"
         @closePopup="isShowPopupTotalEmployee = $event"
+        :dataSource="dataSourceTotalEmployee"
+        :totalRecord="totalEmployee"
+        :isLoadingData="isLoadingDataTotalEmployee"
     >
     </PopupTotalEmployeeVue>
 </template>
 <script>
+import {
+  DxChart,
+  DxArgumentAxis,
+  DxLegend,
+  DxLabel,
+  DxSeries,
+} from 'devextreme-vue/chart';
 import PopupTotalEmployeeVue from './PopupTotalEmployee.vue';
+import EmployeeAPI from '@/api/EmployeeAPI';
 export default {
     name: "ContentOverview",
     components:{
-        PopupTotalEmployeeVue
+        PopupTotalEmployeeVue,
+        DxChart,
+        DxArgumentAxis,
+        DxLegend,
+        DxLabel,
+        DxSeries,
     },
     data() {
         return {
@@ -111,9 +141,37 @@ export default {
             isShowPopupTotalEmployeeStaff: false,
             //Biến showPopup show tổng số nhân viên nghỉ việc tháng này
             isShowPopupTotalEmployeeTermination: false,
+            dataSourceTotalEmployee: [],
+            paramPaging: {
+                pageNumber: 1,
+                pageSize: 50,
+                searchValue: "",
+                organizationUnitID: 0,
+                filterStatus: 0,
+            },
+            isLoadingDataTotalEmployee: true,
+            populationData: [
+                {
+                    arg: 'Quý I',
+                    val:  300,
+                },
+                {
+                    arg: 'Quý II',
+                    val:  400,
+                },
+                {
+                    arg: 'Quý III',
+                    val:  500,
+                },
+                {
+                    arg: 'Quý IV',
+                    val:  350,
+                }
+            ]
         }
     }, 
     created() {
+        this.getDataTotalEmployee();
         this.handleRatioNewEmployee();
         this.handleRatioEmployeeStaff();
         this.handleRatioEmployeeTermination();
@@ -123,6 +181,25 @@ export default {
     computed:{
     },
     methods: {
+        async getDataTotalEmployee(){
+            var me = this;
+            this.isLoadingDataTotalEmployee = true;
+            //Lấy ra dataSource
+            await EmployeeAPI.getDataPaging(this.paramPaging).then(
+                (res) => {
+                    if(res){
+                        this.dataSourceTotalEmployee = res?.data;
+                        this.totalEmployee = res?.total;
+                        setTimeout(() => {
+                            this.isLoadingDataTotalEmployee = false;
+                        }, 200);
+                    }
+                },
+                (err) => {
+                    me.$emit('showToast', true, 'Có lỗi xảy ra', true);
+                }
+            );
+        },
         //xử lý hiển thị tổng số nhân viên đang làm việc
         handleTotalEmployee(){
             return this.totalEmployee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -214,5 +291,18 @@ export default {
     color: #2566e9;
     text-decoration: underline;
 }
-
+.content-overview-chart{
+    height: 600px;
+    background-color: #fff;
+    margin: 0px 8px;
+}
+#chart{
+    width: 100%;
+}
+</style>
+<style>
+g.dxc-title text{  
+  font-size: 24px !important;
+  font-weight: 600 !important;
+} 
 </style>

@@ -21,7 +21,7 @@ class EmployeeApi {
    * @returns thông tin nhân viên có Id = id
    */
   getById(id) {
-    return HTTP.get(`${this.controller}/${id}`);
+    return HTTP.get(`${this.controller}/GetEmployeeProfile/${id}`);
   }
 
   /**
@@ -29,7 +29,7 @@ class EmployeeApi {
    * @returns mã nhân viên mới
    */
   getNewCode() {
-    return HTTP.get(`${this.controller}/NewEmployeeCode`);
+    return HTTP.get(`${this.controller}/GetNewEmployeeCode`);
   }
 
   /**
@@ -38,7 +38,7 @@ class EmployeeApi {
    * @returns Trả về 1 - thêm mới thành công
    */
   postEmployee(employee) {
-    return HTTP.post(`${this.controller}`, employee);
+    return HTTP.post(`${this.controller}/InsertEmployee`, employee);
   }
 
   /**
@@ -66,9 +66,11 @@ class EmployeeApi {
    * @param {*} keyWord     //từ khoá tìm kiếm
    * @returns danh sách tìm kiếm, tổng số trang , tổng số bản ghi
    */
-  filter(pageSize, pageNumber, keyWord) {
+  getDataPaging(paramPaging) {
     return HTTP.get(
-      `${this.controller}/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&employeeFilter=${keyWord}`
+      `${
+        this.controller
+      }/paging?pageSize=${paramPaging?.pageSize}&pageNumber=${paramPaging?.pageNumber}&searchValue=${paramPaging?.searchValue?.trim()}&organizationUnitID=${paramPaging?.organizationUnitID}&filterStatus=${paramPaging?.filterStatus}`
     );
   }
 

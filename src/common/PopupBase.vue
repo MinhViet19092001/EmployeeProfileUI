@@ -87,7 +87,7 @@ export default {
 }
 .toolbar-popup{
     display: flex;
-    height: 48px;
+    max-height: 48px;
     padding: 20px;
     justify-content: space-between;
     align-items: center;
@@ -124,7 +124,12 @@ export default {
 }
 .container-popup{
     padding: 0 20px;
-    height: 100%;
+    height: 500px;
+    overflow: hidden;
     font-size: 14px;
+}
+.icon-close:hover{
+    background-color: #dadce3;
+    color: #1f1f20;
 }
 </style>
